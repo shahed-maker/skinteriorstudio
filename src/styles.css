@@ -48,8 +48,8 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 ::selection { background: var(--bronze); color: var(--charcoal-foreground); }
 a { transition: color .25s ease, opacity .25s ease; }
 
-@utility page-shell { width: min(100% - 2.5rem, 1384px); margin-inline: auto; }
-@utility page-grid { width: min(100% - 2.5rem, 1384px); margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.5rem; }
+@utility page-shell { width: min(calc(100% - clamp(2.5rem, 6vw, 6rem)), 1384px); margin-inline: auto; }
+@utility page-grid { width: min(calc(100% - clamp(2.5rem, 6vw, 6rem)), 1384px); margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.5rem; }
 @utility section-pad { padding-block: clamp(5rem, 10vw, 9rem); }
 @utility eyebrow { font-family: var(--font-label); font-size: .625rem; line-height: 1rem; letter-spacing: .22em; text-transform: uppercase; color: var(--bronze); }
 @utility display-title { margin-top: 1rem; max-width: 52rem; font-family: var(--font-display); font-size: clamp(3.25rem, 6vw, 6rem); line-height: .9; font-weight: 500; letter-spacing: 0; }
@@ -109,7 +109,6 @@ footer a:hover { color: var(--bronze-light); }
 .story-link::after { content: ""; position: absolute; inset-inline: 0; bottom: -.25rem; height: 1px; background: var(--bronze-light); transform: scaleX(.2); transform-origin: left; transition: transform .3s ease; }
 .story-link:hover::after { transform: scaleX(1); }
 
-@media (min-width: 640px) { @utility page-shell { width: min(100% - 4rem, 1384px); } @utility page-grid { width: min(100% - 4rem, 1384px); } }
 @media (max-width: 1023px) { .page-grid > * { grid-column: 1 / -1; } }
 @media (max-width: 639px) { .reels-stage { overflow: hidden; margin-inline: -1.25rem; } .reel-left { transform: translate(-112%,-50%) rotate(-4deg) scale(.72); } .reel-right { transform: translate(12%,-50%) rotate(4deg) scale(.72); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
