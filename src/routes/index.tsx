@@ -6,7 +6,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Facebook,
-  Instagram,
   Mail,
   Menu,
   MessageCircle,
@@ -32,7 +31,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const services = [
+const services: Array<[string, string, string]> = [
   ["01", "Residential Interiors", "Homes shaped around the rhythms, rituals and character of the people living in them."],
   ["02", "Commercial Interiors", "Distinctive workspaces and customer environments built around brand and purpose."],
   ["03", "Living Spaces", "Layered, inviting living rooms that balance comfort with quiet sophistication."],
