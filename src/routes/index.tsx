@@ -16,6 +16,17 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import studioAboutAsset from "@/assets/interiors/studio-about.jpg.asset.json";
+import residentialAsset from "@/assets/interiors/residential.jpg.asset.json";
+import commercialAsset from "@/assets/interiors/commercial.jpg.asset.json";
+import livingAsset from "@/assets/interiors/living.jpg.asset.json";
+import kitchenAsset from "@/assets/interiors/kitchen.jpg.asset.json";
+import furnitureAsset from "@/assets/interiors/furniture.jpg.asset.json";
+import turnkeyAsset from "@/assets/interiors/turnkey.jpg.asset.json";
+import projectCourtyardAsset from "@/assets/interiors/project-courtyard.jpg.asset.json";
+import projectStudioAsset from "@/assets/interiors/project-studio.jpg.asset.json";
+import projectOfficeAsset from "@/assets/interiors/project-office.jpg.asset.json";
+import materialLibraryAsset from "@/assets/interiors/material-library.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,6 +51,8 @@ const services: Array<[string, string, string]> = [
   ["06", "Turnkey Interior Solutions", "One cohesive journey from first conversation through construction and final styling."],
 ];
 
+const serviceImages = [residentialAsset.url, commercialAsset.url, livingAsset.url, kitchenAsset.url, furnitureAsset.url, turnkeyAsset.url];
+
 const process = [
   ["01", "Discover", "We listen closely to your needs, lifestyle and ambitions."],
   ["02", "Concept", "A clear creative direction gives the project its identity."],
@@ -50,9 +63,9 @@ const process = [
 ];
 
 const projects = [
-  { name: "The Courtyard Residence", type: "Residential", location: "Dhaka · Sample Project", tone: "warm", description: "A calm family home imagined through natural texture, crafted timber and filtered light." },
-  { name: "Studio House", type: "Living Spaces", location: "Bangladesh · Sample Project", tone: "stone", description: "An open, expressive interior where sculptural forms meet practical everyday living." },
-  { name: "The Quiet Office", type: "Commercial", location: "Dhaka · Sample Project", tone: "dark", description: "A focused workplace concept defined by strong lines, soft acoustics and warm illumination." },
+  { name: "The Courtyard Residence", type: "Residential", location: "Dhaka · Sample Project", image: projectCourtyardAsset.url, description: "A calm family home imagined through natural texture, crafted timber and filtered light." },
+  { name: "Studio House", type: "Living Spaces", location: "Bangladesh · Sample Project", image: projectStudioAsset.url, description: "An open, expressive interior where sculptural forms meet practical everyday living." },
+  { name: "The Quiet Office", type: "Commercial", location: "Dhaka · Sample Project", image: projectOfficeAsset.url, description: "A focused workplace concept defined by strong lines, soft acoustics and warm illumination." },
 ];
 
 const materials = ["Wood", "Stone", "Marble", "Metal", "Fabric", "Lighting", "Custom Furniture", "Finishes"];
@@ -68,6 +81,14 @@ function Placeholder({ label, className = "", tone = "warm" }: { label: string; 
     <div className={cn("placeholder-art group relative overflow-hidden", `placeholder-${tone}`, className)} role="img" aria-label={`${label} image placeholder`}>
       <div className="placeholder-architecture" aria-hidden="true" />
       <span className="absolute bottom-5 left-5 z-10 font-label text-[10px] uppercase tracking-[0.2em] text-surface-foreground/70">{label} · Replace image</span>
+    </div>
+  );
+}
+
+function InteriorImage({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+  return (
+    <div className={cn("group relative overflow-hidden bg-secondary", className)}>
+      <img src={src} alt={alt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
     </div>
   );
 }
@@ -147,12 +168,12 @@ function About() {
   return (
     <section id="studio" className="section-pad bg-background">
       <div className="page-grid">
-        <div className="lg:col-span-5"><Placeholder label="Studio / About" className="aspect-[4/5]" tone="stone" /></div>
+        <div className="lg:col-span-5"><InteriorImage src={studioAboutAsset.url} alt="Refined contemporary living room with sculptural furniture and warm natural light" className="aspect-[4/5]" /></div>
         <div className="flex flex-col justify-between lg:col-span-6 lg:col-start-7 lg:py-8">
           <SectionTitle eyebrow="The studio" title="Interiors with a sense of belonging." />
           <div className="mt-10 lg:mt-16">
             <Quote className="mb-5 h-8 w-8 text-bronze" strokeWidth={1} />
-            <p lang="bn" className="max-w-2xl font-bengali text-2xl leading-relaxed text-foreground sm:text-3xl">“আধুনিক রুচিশীল এবং ক্রিয়েটিভ ইন্টেরিয়র ডিজাইনের জন্য যোগাযোগ করুন।”</p>
+            <p className="max-w-2xl font-display text-3xl leading-relaxed text-foreground sm:text-4xl">“Get in touch for modern, tasteful and creative interior design.”</p>
             <div className="mt-8 grid gap-6 border-t border-border pt-7 sm:grid-cols-2">
               <p className="text-sm leading-7 text-muted-foreground">SK Interior Studio creates considered spaces that feel personal, functional and enduring. Our work begins with how you want to live, work and feel.</p>
               <p className="text-sm leading-7 text-muted-foreground">From spatial planning to custom details and execution, we bring every layer into one clear, cohesive design language.</p>
@@ -172,7 +193,7 @@ function Services() {
         <div className="mt-14 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
           {services.map(([number, name, copy], index) => (
             <article className="service-card group bg-soft" key={name}>
-              <Placeholder label={name} className="aspect-[5/4]" tone={index % 3 === 0 ? "warm" : index % 3 === 1 ? "stone" : "dark"} />
+              <InteriorImage src={serviceImages[index] ?? residentialAsset.url} alt={`${name} by SK Interior Studio`} className="aspect-[5/4]" />
               <div className="p-6 sm:p-7">
                 <div className="mb-8 flex items-start justify-between"><span className="font-label text-[10px] tracking-[0.18em] text-bronze">{number}</span><ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" /></div>
                 <h3 className="font-display text-3xl text-foreground">{name}</h3>
@@ -214,7 +235,7 @@ function Projects() {
         <div className="mt-14 space-y-20 lg:space-y-28">
           {projects.map((project, index) => (
             <article className={cn("grid gap-7 lg:grid-cols-12 lg:items-end", index % 2 === 1 && "lg:[&_.project-visual]:order-2")} key={project.name}>
-              <Placeholder label={project.name} className={cn("project-visual lg:col-span-8", index === 0 ? "aspect-[16/9]" : "aspect-[4/3]")} tone={project.tone} />
+              <InteriorImage src={project.image} alt={`${project.name} — ${project.type} interior`} className={cn("project-visual lg:col-span-8", index === 0 ? "aspect-[16/9]" : "aspect-[4/3]")} />
               <div className="lg:col-span-4 lg:px-4 lg:pb-5">
                 <p className="eyebrow">{project.type}</p>
                 <h3 className="mt-3 font-display text-4xl sm:text-5xl">{project.name}</h3>
@@ -235,7 +256,7 @@ function Materials() {
       <div className="page-grid">
         <div className="lg:col-span-5 lg:sticky lg:top-32 lg:self-start">
           <SectionTitle eyebrow="Materials & craftsmanship" title="The beauty is in what you can feel." copy="Natural character, precise workmanship and a thoughtful dialogue between every surface." />
-          <Placeholder label="Material Library" className="mt-10 aspect-[4/3]" tone="warm" />
+          <InteriorImage src={materialLibraryAsset.url} alt="Crafted interior materials, furniture and layered finishes" className="mt-10 aspect-[4/3]" />
         </div>
         <div className="mt-12 lg:col-span-6 lg:col-start-7 lg:mt-0">
           {materials.map((material, index) => (
