@@ -193,7 +193,7 @@ function Services() {
         <div className="mt-14 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
           {services.map(([number, name, copy], index) => (
             <article className="service-card group bg-soft" key={name}>
-              <InteriorImage src={serviceImages[index]} alt={`${name} by SK Interior Studio`} className="aspect-[5/4]" />
+              <InteriorImage src={serviceImages[index] ?? residentialAsset.url} alt={`${name} by SK Interior Studio`} className="aspect-[5/4]" />
               <div className="p-6 sm:p-7">
                 <div className="mb-8 flex items-start justify-between"><span className="font-label text-[10px] tracking-[0.18em] text-bronze">{number}</span><ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" /></div>
                 <h3 className="font-display text-3xl text-foreground">{name}</h3>
